@@ -6,12 +6,11 @@ class ExamException(Exception):
 class CSVTimeSeriesFile():
     def __init__(self, name):
 
-        if name.endswith('.csv') == False:
-            raise ExamException('Should be CSV type')
-
         self.name = name
 
     def get_data(self):
+        if name.endswith('.csv') == False:
+            raise ExamException('Load a CSV file')
         values = []
 
         opened_csv = open(self.name, "r")
@@ -75,7 +74,7 @@ def compute_daily_variance(x):
                 period_temperatures.append(y[1])
             else:
                 if len(period_temperatures) == 1:
-                    variance_list.append(0)
+                    variance_list.append(None)
                     actual_day = y[0]
                     sum_temperature = y[1]
                 else:
@@ -100,16 +99,14 @@ def compute_daily_variance(x):
 
     return variance_list
 
-"""data = 'insert CSV here'"""
+"""name = 'Insert CSV file here'"""
 
-time_series_file = CSVTimeSeriesFile(data)
+time_series_file = CSVTimeSeriesFile(name)
 time_series = time_series_file.get_data()
 
 compute_daily_variance(time_series)
 
-"""print(variance_list)"""
 
-                
         
 
         
